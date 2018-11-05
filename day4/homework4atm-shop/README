@@ -1,0 +1,77 @@
+作者：杨浩然
+程序介绍：
+实现模拟ATM常用功能，数据传输使用json格式，数据存储在txt文件中，支持用户和管理员登陆
+未实现部分：log日志不完整，购物车付款接口未接入
+
+|-- homework4atm-shop
+|-- README
+|-- atm    # atm 主程序目录
+|   |-- __init__.py
+|   |-- bin  # atm 执行文件 目录
+|   |   |-- atm.py # atm 执行主程序
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- atm.cpython-37.pyc
+|   |   |   |-- __init__.cpython-37.pyc
+|   |-- conf
+|   |   |-- settings.py # atm配置文件
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- settings.cpython-37.pyc
+|   |   |   |-- __init__.cpython-37.pyc
+|   |-- core # atm核心代码
+|   |   |-- adduser.py # 管理员添加用户
+|   |   |-- bill.py # 用户查看流水账信息
+|   |   |-- frozeuser.py # 管理员操作用户状态
+|   |   |-- logger.py # logger配置
+|   |   |-- main.py # atm主程序入口
+|   |   |-- manage_credit.py # 管理员管理用户额度
+|   |   |-- repayment.py # 用户还款模块
+|   |   |-- transfer.py # 用户转账模块
+|   |   |-- user.py # 用户查看个人信息模块
+|   |   |-- withdraw.py # 用户取款模块
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- adduser.cpython-37.pyc
+|   |   |   |-- bill.cpython-37.pyc
+|   |   |   |-- frozeuser.cpython-37.pyc
+|   |   |   |-- logger.cpython-37.pyc
+|   |   |   |-- main.cpython-37.pyc
+|   |   |   |-- manage_credit.cpython-37.pyc
+|   |   |   |-- repayment.cpython-37.pyc
+|   |   |   |-- transfer.cpython-37.pyc
+|   |   |   |-- user.cpython-37.pyc
+|   |   |   |-- withdraw.cpython-37.pyc
+|   |   |   |-- __init__.cpython-37.pyc
+|   |-- db
+|   |   |-- account_example.py
+|   |   |-- dbtool.py # 数据操作工具
+|   |   |-- __init__.py
+|   |   |-- account # 存放用户信息的文件，以用户id命名
+|   |   |   |-- 10000.txt
+|   |   |   |-- 10001.txt
+|   |   |   |-- 10002.txt
+|   |   |   |-- __init__.py
+|   |   |-- bill # 存放用户流水账的文件，以用户id_bill命名
+|   |   |   |-- 10000_bill.txt
+|   |   |-- manager # 存放管理员信息的文件，以管理员id命名
+|   |   |   |-- 123456.txt
+|   |   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- dbtool.cpython-37.pyc
+|   |   |   |-- __init__.cpython-37.pyc
+|   |-- log # 日志存放位置
+|   |-- test # test
+|   |   |-- test.py
+|   |   |-- __init__.py
+|-- shopping
+|   |-- __init__.py
+|   |-- bin
+|   |   |-- __init__.py
+|   |-- conf
+|   |   |-- __init__.py
+|   |-- core
+|   |   |-- __init__.py
+|   |-- db
+|   |   |-- __init__.py
+|   |-- log
