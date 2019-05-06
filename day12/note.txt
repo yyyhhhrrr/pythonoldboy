@@ -1,0 +1,84 @@
+关系型数据库
+Oracle 收费
+Mysql 开源 被oracle收购了
+SqlServer 微软
+DB2 IBM
+Postgresql
+Sqlite 轻量级
+access 轻量级
+
+
+
+建立外键 外键约束
+KEY 'key_name'（'class_id'）, CONSTRAINT 'key_name' FOREIGN KEY ('class_id') PREFERENCES 'class' ('id')
+key_name 可写可不写
+
+mysql 默认不匹配大小写
+
+mtysql 连接查询
+inner join (内连接、等值连接)：获取两个表中字段匹配关系的记录
+left join(外连接，左连接)：获取左表所有记录，即使右边没有匹配的字段
+right join(外连接，右连接)：获取右边所有记录，即使左边没有匹配的字段
+
+mysql不支持full join  但是可以左连接union 右连接（求并集）
+oracle支持full join
+
+事务：
+只有使用了InnoDB作为存储引擎才支持事务
+四个特性（ACID）：Atomicity 原子性，Consistency 稳定性，Isolation 隔离性，Durability 可靠性
+详情见博客
+<< begin;
+<< insert ...
+<< rollback  没有begin开始事务就不能回滚
+
+
+
+索引:具体见博客
+数据库索引：可以先理解为相当于每个字段都hash() 然后哈希值排序，最后二分查找（B树），时间复杂度O（log n）,比如42亿个数据 为2^32，最多32次，
+这是B树，但是磁盘IO消耗太大了，所以数据库采用的是B+树，是改良的B树（B-tree 或者B-树 但是其实这样叫不准确 容易误导）,类似二分查找
+
+索引分单列索引和组合索引。
+单列索引：即一个索引只包含单个列，一个表可以有多个单列索引，但这不是组合索引
+组合索引：即一个索引包含多个列（在两个字段加起来时才唯一的时候，可以做组合索引，如果两个字段有一个唯一就没必要）
+
+创建索引是应用SQL查询语句的条件（一般WHERE子句的条件）
+
+索引的缺点。。见博客
+
+主键是一种索引，默认的
+
+普通索引创建方式：
+查看索引：show index from table
+创建索引：create index index_name on  table(column(32))
+修改索引：alter table add index index_name on (column(32))
+删除索引：drop index index_Name on table
+
+
+唯一索引创建方式：
+与上面类似，不同的事索引列的值必须唯一，但允许有空值。
+就在上面index 前加 unique
+
+更多见博客
+
+
+
+
+
+
+
+
+
+python 连mysql
+MYSQLdb 在3.0上用不了，因为没更新
+3.0用pymysql 与MYSQL语句一样
+
+
+ORM框架（Object-Relational-Mapping） 对象关系映射
+
+python下最著名的ORM框架 SQLAlchemy
+用户 openstack，uber等
+
+
+要想写中文 在 engine =create_engine("mysql+pymysql://root:960314@localhost/pytest",encoding='utf-8',echo=True) 写了encoding还不管用
+必须要写成“mysql+pymysql://root:960314@localhost/pytest？charset=utf8”
+以后就直接写“mysql+pymysql://root:960314@localhost/pytest？charset=utf8” 不用写encoding了

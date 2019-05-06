@@ -1,0 +1,21 @@
+CSS补充
+ 属性：
+    position :
+       (1)fixed => 固定在某个位置
+       (2)relative + absolute: absolute模块存放的位置是其父模块relative的相对位置
+           <div style="position:relative;">
+              <div style="position:absolute;">
+              </div>
+           </div>
+    opcity:0.5 透明度
+    z-index: 层级顺序 谁大谁在上
+
+    overflow: hidden （隐藏图片）
+              auto （增加滑轮）
+
+    background-image:url('image/4.gif'); # 默认,div大，图片重复访
+    background-repeat: repeat-y;
+    position抠洞:
+        background-position-x:
+        background-position-y:
+        background-position: 10px 10px 跟上面x y一样

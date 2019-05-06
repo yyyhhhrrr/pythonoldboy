@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .left{
+            float: left;
+        }
+        .pg-header{
+            height: 48px;
+            background-color: #2459a2;
+            color:white;
+        }
+        .pg-content .menu{
+            position: fixed;
+            top:48px;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            background-color: #dddddd;
+        }
+        .pg-content .content{
+            position: fixed;
+            top:48px;
+            right:0;
+            bottom: 0;
+            left: 200px;
+            background-color: #a64da9;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body style="margin: 0">
+    <div class="pg-header"></div>
+    <div class="pg-content">
+      <div class="menu left"></div>
+      <div class="content left"></div>
+    </div>
+    <div class="pg-footer"></div>
+</body>
+</html>

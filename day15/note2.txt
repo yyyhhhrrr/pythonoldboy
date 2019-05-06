@@ -1,0 +1,125 @@
+
+
+JavaScript
+独立的语言，浏览器本身就是一个JavaScript的解释器
+js要加分号 是因为网页上要尽量把js代码压缩成一行，所以必须加分号来识别哪个是一行
+
+JavaScript代码存在形式：
+   - head中 (一进入网页就触发)
+           <script>
+               // js代码
+               alert(123);
+           </script>
+
+           <script type="text/javascript">
+               // js代码
+               alert(123);
+           </script>
+   - 文件
+          <script src="文件路径"></script>
+
+   PS:JS代码需要放置在<body>标签内部的最下方
+
+   注释
+       当行注释 //
+       多行注释 /*  */
+
+   变量：
+       python: name='alex'
+       JavaScript: name='alex' # js中这样是默认全局变量
+                   var name='alex' # 这个才是局部变量 最好都这样 全局变量一般很少
+
+   写JS代码：
+       - html 文件中编写
+       - 浏览器终端 比如chrome 点审查 然后console里面写代码
+
+   基本数据类型
+       数字
+          a =18;
+       字符串
+          a = 'alex'
+          a.chart(索引未知)
+          a.substring(起始位置，结束位置) 取头不取尾 比如：substring(0,length) 就都取完了 因为第一个index为0 最后一个是index是长度-1
+          a.length  获取当前字符串长度
+          ...
+       列表(数组)
+          a=[1,2,3] 方法见博客
+          最难的是a.splice 加入 删除数组元素
+
+       字典
+          a = {'k1':'v1','k2':'v2'}
+          a['k1']=v1
+       布尔类型
+           python: True False
+           Js:true false (小写)
+
+   for循环
+       1.循环时，循环的是元素的索引
+                 字典 循环的是元素的key
+           a=[1,2,3,4]
+           for(var item in a){
+                    console.log(item); # 输出的是下表索引
+       }
+       2. 第二种循环（不支持字典，因为字典是无序的）
+            for(var i=0;i<10;i++){
+
+            }
+            a=[1,2,3,4]
+            for (var i=0;i<a.length;i++){
+
+            }
+
+   条件语句
+       if(条件){
+       }
+       else if(){
+       }
+       else(){
+       }
+
+       == 值相等
+       === 值和类型都相等
+       != 值不相等
+       !== 值和类型都不相等
+       &&  and
+       ||  or
+
+   函数：
+       function 函数名(a,b,c){
+       }
+       函数名（1,2,3）
+
+   Dom直接选择器:
+      1.找到标签
+           a.直接找
+               获取单个元素：document.getElementById('')
+               获取单个元素：document.getElementByName('')
+               获取多个元素（数组）document.getElementsByTagName('div')
+               获取多个元素（数组）document.getElementsByClassName('')
+           b.间接找
+                parentElement           // 父节点标签元素
+                children                // 所有子标签
+                firstElementChild       // 第一个子标签元素
+                lastElementChild        // 最后一个子标签元素
+                nextElementtSibling     // 下一个兄弟标签元素
+                previousElementSibling  // 上一个兄弟标签元素
+
+
+      2.操作标签
+           a.innerText
+               获取标签中的文本内容
+               标签.innerText
+
+               对标签内部文本进行重新赋值
+               标签.innerText=''
+           b.className
+               tag.className = > 直接整体做操作
+               tag.classList.add('样式名') 添加指定样式
+               tag.classList.remove('样式名') 删除指定样式
+
+           c.checkbox
+                 选中 checkbox对象.checked=true
+                 不选中 checkbox对象.checked=false
+
+   定时器：
+       setInterval('执行的代码',执行时间间隔)

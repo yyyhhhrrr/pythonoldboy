@@ -1,0 +1,175 @@
+HTML
+   1.其实就是一套规则，浏览器认识的规则
+   2.开发者：
+      - 学习html规则
+      - 开发后台程序：
+           - 写html文件 （充当模板的作用）
+           - 数据库获取数据，然后替换到html文件的指定位置  （web框架就是帮我们做这些事的）
+   3.本地测试
+      - 找到文件路径，直接浏览器打开
+      - pycharm 打开测试 （pycharm会自己给你起个socket）
+   4.编写html文件
+      - doctype对应关系
+      - html标签，标签内部可以写属性  ===> <html>标签只能有一个
+      - 注释用： <!-- 注释的内容 -->
+   5.标签分类
+      - 自闭合标签 （就不用写结尾） 可以写成<meta >或者<meta />所有自闭和标签都可以这样 但最好是在后面加斜杠 例如<br />
+        <meta charset="UTF-8"> 就先记这个
+      - 主动闭合标签
+        <title>Title</title>
+   6.
+      head标签中
+         - <meta  ->  编码，跳转，刷新，关键字，描述，IE兼容>
+         - title 标题
+         - <link /> 里面有个网站窗口的小图标，还有很多先不讲
+         - <style />
+         - <script>
+
+   7.body标签
+       - 图标，&nbsp一个空格; &gt 大于;&lt 小于
+       - p标签，段落
+       - br,换行
+       ========总结========
+          所有的标签分为：
+              块级标签：独占一行
+                 H系列（加大加粗），p标签（段落和段落之间有间距）,div标签(白板) div是用的最多的
+              行内标签（内联标签）：可以多个存在一行
+                 span标签（白板）
+          标签之间可以嵌套
+          标签存在的意义，定位操作容易，以及css js操作很简单
+          ps: chrome 可以审查元素的使用（重要）
+              - 可以定位
+              - 可以查看样式
+          能提交数据的标签：只有这么多
+
+              - div 必会
+              - span 必会
+              - h系列 必会
+              input系列+form：要全会
+                  <form action> 提交表单
+                  - input type="text"    - name属性，value=.. value是输入默认值
+                  - input type="password"- password属性,value=...
+                  - input type="submmit" - value="提交"提交按钮 表单
+                  - input type="button"  - valus="登录按钮
+
+                  - input type="redio" 单选框  - value,name属性（name相同则互斥 就只能选一个的意思）
+                  - input type="checkbox" 复选框 -value ,name属性（批量获取数据）
+
+                  - input type="file"    - 默认上传不了,必须依赖form表单的一个属性<from enctype="multipart/form-data">
+                  - input type="reset"   - 重置
+
+                   <textarea name="tx"> 默认值 </textarea> 多行文本输入 这个也可以提交数据到后台
+
+                   select标签             - name 内部opetion value ,提交到后台，size 大小，multiple 多选
+          - a标签 必会
+              - 跳转  <a href="http://www.baidu.com" targrt=...> 百度 </a>
+              - 锚 <a href='#某个标签的id'> 标签id不允许重复
+          - img标签 必会
+              - <img src="1.jpg" title="百度" style="height:200px;width:200px;" alt="百度">
+              title 鼠标放上去现实 alt没有图片的时候显示
+          - 列表
+               <ul>
+                  <li>
+               <ol>
+                  <li>
+               <dl>
+                   <dt>
+                   <dd>
+
+          - table标签（表格） 必会
+               table
+                   thead
+                       tr
+                           th
+                   tbody
+                       tr
+                           td
+                colspan 列合并 等于几表示占几格
+                rowspan 行合并
+          - lable标签（用于点击文字，使得关联的标签获取光标） 知道
+               <label for="username">用户名：</label>
+               <input id="username" type="text" name=" user" />
+          - fieldset 知道
+              legend
+   - 20 个标签
+CSS
+
+   在标签上设置style属性：
+           background-color:#2459a2;
+           height:48px;
+           ...
+   编写css样式:
+         1.标签的style属性
+         2.写在head里面，style标签中写样式
+             - id 选择器：（用的少）知道
+                  <style>
+                  #i1{
+                     background-color:#2459a2;height:
+                     48px;
+                      }
+                  </style>
+             - class 选择器：（用的最多）最推荐
+                 .名称{
+
+                     }
+                 <标签 class="名称"> <标签 />
+             - 标签选择器：要会
+                  div {
+                  }
+                  所有的div都此样式
+
+             - 层级选择器 要会
+                  .c1 .c2 div {
+                  }
+                  class=c1 下 class=c2下的div
+
+             - 组合选择器（逗号）要会
+                  #c1,c2,c3{}
+                  逗号前后都可以用
+
+             - 属性选择器 必会
+                  对选择到的标签再通过属性再进行一次筛选
+
+             PS:
+               优先级：标签上的style优先，其他的就按照编写的顺序，就近原则
+
+         2.5 css样式文件也可以写在单独文件中
+
+         3.注释 /*  */
+         4.边框
+            - 宽度：样式：颜色
+            - border：4px dotted red;
+         5.用的比较多的属性：必会
+               height , 高度
+               width, 宽度 像素，百分比也可以
+               text-align:center, 水平方向居中
+               line-height, 垂直方向根据标签高度居中
+               color, 字体颜色
+               font-size, 字体大小
+               font-weight 字体加粗
+         6.float 应用最广的
+             让标签浪起来，块级标签也可以堆叠
+             父div管不住的时候，在内部最后面加上：<div style="clear:both;"></div>
+         7.display
+              display:none; 让标签消失 （后面写js会用 比如弹窗 一开始就是隐藏，点开就显示）
+              display:inline div变span
+              display:block span变div
+              display:inline-block; 具有inline,默认自己有多少占多少
+                                    具有block,可以设置高度，宽度，padding,margin
+              =========
+              行内标签：无法设置高度，宽度，padding,margin
+              块级标签：设置高度，宽度，padding,margin
+          8.padding margin(0,auto)
+              边距:
+                  内边距 padding,
+                  外边距 marigin,
+
+
+   - 颜色
+   - 位置
+   ...
+
+浏览器本质相当于socket客户端，业务服务器相当于socket服务端，建立sokcet传输数据，
+服务器端收到消息进行处理，发送数据并关闭，然后浏览器收到消息展示页面，
+
+

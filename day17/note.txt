@@ -1,0 +1,216 @@
+jQuery
+
+    http://jquery.cuishifeng.cn/
+    模块 <==>  类库
+    DOM/BOM/JS 的类库
+
+
+     版本:系列
+           1.x 推荐 1系列最新版本 兼容性更好
+           2.x
+           3.x
+
+     转换:
+           jquery对象[0] -> DOM对象（ <div id="i1">123</div>）
+           $(DOM对象) -> jquery对象
+
+
+    一、查找元素
+        jQuery:
+        引入jquery 后 jQuery. 等于 $.
+            选择器：直接找到某个或者某类标签
+            1.id
+               $('#id')
+            2.class
+                <div class='c1'></div>
+                 通过$('.c1')找到class
+            3.标签选择器
+                 <div class='c1'>
+                    <a>f</a>
+                    <a>f</a>
+                 </div>
+                  <div class='c2'>
+                    <a>f</a>
+                 </div>
+                  通过 $('a') 找到所有a标签
+            4.组合
+                 $('a,.c2') 找到所有a标签 和div class='c2'的标签
+            5.层级
+                 $('#i10 a') 找到id=i10 下子孙里面的a标签
+                 $('#i10>a') 只找儿子
+
+            6.基本筛选
+               :first  $('#i10 a:first') 找到id=i10 子孙里第一个a标签
+               :last
+               :eq()  索引 从0开始
+            7.属性
+               $('[alex]') 查找具有alex属性的所有标签
+               $('[alex="123"]') 查找alex属性=123的所有标签
+
+    二、操作元素
+
+===> 实例：
+       多选 反选 全选
+        - 选择权
+            - $(this).prop('checked', false);设置值
+            - $(this).prop('checked'); 获取值
+            -
+              jQuery 方法内置循环 $('#..').xxx
+            - $('#..').each(function(k){
+               // k 当前索引
+               // this.   是DOM对象 当前循环的元素        $(this) jquery对象
+            })
+
+            - 三元运算符
+              v= 条件? 真:假
+        - 筛选
+            /*
+            $(this).next()      下一个
+            $(this).prev()      上一个
+            $(this).parent()    父
+            $(this).children()  孩子
+            $('#i1').siblings() 兄弟
+            $('#i1').find('#i1') 子子孙孙中查找
+            $(this).prevAll()上面所有
+
+        文本操作：
+            $(..).text() 获取文本内容
+            $(..).text("<a>1</a>") 设置文本内容
+
+            $(..).html()
+            $(..).html("<a>1</a>")
+
+        样式操作：
+             addClass
+             removeClass
+             toggleClass
+
+        属性操作：
+             # 专门用于做自定义属性
+             $(..).attr('n') 获取自定义属性的值
+             $(..).attr('n','v') 设置自定义属性的值
+             $(..).removeAttr('n')
+
+             # 专门用于checkbox radio
+             $(..).prop('checked')
+             $(..).prop('checked,true')
+
+             PS:
+              .index() 获取索引位置
+        文档处理:
+              append
+              prepend
+              after
+              before
+              remove
+              empty
+
+              clone
+
+        CSS处理:
+
+			$('t1').css('样式名称', '样式值')
+			点赞：
+				 - $('t1').append()
+				 - $('t1').remove()
+				 - setInterval
+				 - 透明度 1 》 0
+				 - position
+				 - 字体大小，位置
+
+	    位置：
+			$(window).scrollTop()  获取
+			$(window).scrollTop(0) 设置
+			scrollLeft([val])
+
+			offset().left                 指定标签在html中的坐标
+			offset().top                  指定标签在html中的坐标
+
+			position() 	                  指定标签相对父标签(relative)标签的坐标
+			<div style='relative'>
+				<div>
+					<div id='i1' style='position:absolute;height:80px;border:1px'></div>
+				</div>
+			</div>
+
+
+			$('i1').height()           # 获取标签的高度 纯高度
+			$('i1').innerHeight()      # 获取边框 + 纯高度 + ？
+			$('i1').outerHeight()      # 获取边框 + 纯高度 + ？
+			$('i1').outerHeight(true)  # 获取边框 + 纯高度 + ？
+
+			# 纯高度，边框，外边距，内边距
+
+		事件
+			DOM： 三种绑定方式
+				jQuery：
+					$('.c1').click()
+					$('.c1').....
+
+					$('.c1').bind('click',function(){
+
+					})
+
+					$('.c1').unbind('click',function(){
+
+					})
+
+					*******************
+					$('.c').delegate('a', 'click', function(){
+
+					})
+					$('.c').undelegate('a', 'click', function(){
+
+					})
+
+					$('.c1').on('click', function(){
+
+					})
+					$('.c1').off('click', function(){
+
+					})
+
+				阻止事件发生
+					return false
+
+				# 当页面框架加载完成之后，自动执行
+				$(function(){
+
+					$(...)
+
+				})
+
+		jQuery扩展：
+			- $.extend        $.方法
+			- $.fn.extend     $(..).方法
+
+			(function(){
+				var status = 1;
+				// 封装变量
+			})(jQuery)
+
+
+	二、操作元素
+
+===》实例：
+
+作业：
+	一：
+			$('i1').height()           # 获取标签的高度 纯高度
+			$('i1').innerHeight()      # 获取边框 + 纯高度 + ？
+			$('i1').outerHeight()      # 获取边框 + 纯高度 + ？
+			$('i1').outerHeight(true)  # 获取边框 + 纯高度 + ？
+
+			# 纯高度，边框，外边距，内边距
+
+	二、所有实例敲一遍
+
+	三、编辑框
+
+
+
+
+
+
+
+

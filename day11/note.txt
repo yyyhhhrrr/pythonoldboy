@@ -1,0 +1,131 @@
+独立进程间的通信（不同应用）
+1.通过磁盘
+2.socket
+3.通过broker(中间代理，到broker也是通过socket)
+
+常见消息队列 RabbitMQ ZeroMQ ActiveMQ
+
+RabblitMQ(erlang 开发的 windows上要与运行必须装erlang)
+
+如果关闭rabbitMQ服务，数据会丢失，所以要对每一个队列做消息持久化
+在producer里加
+队列持久化：channel.queue_declare(queue='hello',durable=True)
+消息持久化：在chanel.basic_publish{
+                 properties=pika.BasicProperties（delivery_mode=2,）
+  }
+
+要想producer等consumer处理完当前消息再给它发消息的实现：
+在consumer 中加入 channerl.basic_qos(prefetch_count=1)
+
+
+
+
+消息的发布、订阅（exchange 转发）
+（1）fanout:所有bind到此exchange的queue都可以接收消息
+（2）direct:通过routingKey和exchange决定的那个唯一的queue可以接收消息
+（3）topic:所有复合routingKsy(此时可以是一个表达式)的routingKey所bind的queue可以接收消息
+headers:通过headers来绝对把消息发给哪些queue(很少用)
+
+rabbitmq 与 activemq 的消息订阅发布的不同:
+activemq最常用的topic消息订阅发布，发布者发布信息到topic ,消费者绑定topic并从topic拿信息
+rabbitmq的topic 是更细致的消息过滤，比如 发布者发布 mysql.info  消费者topic为mysql.*可以收到这个信息
+
+
+remote procedure call(远程程序调用) ----RPC服务
+RPC 服务就是本地发送执行指令到远程主机，发送到远程，远程主机返回结果给本地主机
+既是消费者又是生产者
+
+rabbitmq 实现rpc服务：
+整个rpc服务的流程为：
+                               ___________________________________
+                              |        rpc_queue                 |
+                              |                                  |
+                              |    args: 1.reply_to 随机queue    |
+                              |          2.corr_id               |
+client  --------------------->|                                  |----------------------> server
+                              |__________________________________|
+
+                              _________________________
+                              |      随机queue        |
+                              |                       |
+                              |   args:1.corr_id      |
+client <----------------------|   result              |<-----------------------server
+                              |                       |
+                              |_______________________|
+
+先启动server 再启动client
+(1) server 声明 rpc_queue 往里面收要处理的数据，client通过rpc_queue发数据，包含 server处理完数据要返回结果使用的一个随机queue的指针（reply_to）和 一个随机生成的corr_id
+(2) server 从rpc_queue拿到数据 进行处理，处理完后调用回调函数，通过 随机的queue 发送带有 corr_id 和 结果的消息传给client
+(3) client 收到消息 调用回调函数 展示结果
+
+注意：生成corr_id的作用在于，确保返回的数据是这次调用远程函数的结果，比如一个函数处理5分钟，一个函数处理2分钟，处理的快的先返回了，为了
+防止这种情况，需要加入corr_id来确认是否为函数调用的正确结果
+
+openstack 默认用的rabbitmq
+
+
+
+
+Redis
+
+进程间通过缓存实现内存共享（进程到缓存系统(broker 中间件)采用socket）
+主流缓存系统 Redis mongodb memcache 自己也可以写
+mongodb 不需要配置，直接持久化 往内存存东西，会同步到硬盘
+redis （半持久化）默认存在内存，必须要手动或者配置才能同步到硬盘
+memcache 只能在内存里，不能持久化（轻量级缓存）
+
+
+Redis  是单线程的，通过epoll IO多路复用（并不是真正的异步IO）实现的并发，每秒钟一台机器并发能达到8万-10万，效率很高
+
+启动redis服务端  redis目录下 src/redis-server
+启动redis客户端 redis 目录下 src/redis-cli
+在终端下：
+set name yang 第一个参数是key（name） 第二个参数是value(yang)
+get name 获取值
+set name yang ex 2 (ex 2 表示只保留2s)
+
+redis 中设置值 默认，不存在则创建，存在则修改
+ex 过期时间 s
+px 过期时间 ms
+nx 如果为True 只有key不存在时当前set才执行
+xx 如果为True 只有key存在时当前set才执行
+
+
+string操作
+剩下的在博客找  小写大写无所谓
+setnx key value    key不存在时才创建
+setex key value time  过期s
+mset K1 V1 K2 V2    批量set
+mget K1 K2     批量get
+
+来个牛逼的：setbit 可以解决优化用户量在亿级以上通过redis展示在线用户量，及查看该用户是否在线（不用通过数据库 写入数据太大 效率慢）
+
+setbit key offset(位的索引) value  （value的值只能是1或0）
+
+比如 第二个参数 offset 指的是将装换为二进制后的索引
+例如：setbit n1 7 1 (n1的值为'foo' )
+意思是 设置 'foo'转为二进制后 为 01100110 01101111 01101111 把 第七位 设为 1 变成 01100111 01101111 01101111
+再get n1 就从'foo'变成'goo'了
+
+当有亿级用户 每增加一个用户 就 setbit n2 600 1 (意思是把n2 的二进制第600为设为1  就相当于用户id=600)
+所以就可以实现：
+（1）查看用户id为600的用户是否在线 就 getbit n2 600 (结果为(integer 1)  为1就表示在线  为0就表示没在线   )
+（2）查看有多少用户在线 就 bitcount n2 (结果为多少，就有多少用户在线   bitcount是查询二进制有多少个1)
+
+
+
+
+
+
+
+
+hash 操作
+hset info name yang
+hset info age 22
+hget info name
+hgetall info
+hkeys info
+hvals info
+
+
+list和set集合

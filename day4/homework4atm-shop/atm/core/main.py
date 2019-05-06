@@ -157,12 +157,12 @@ def admin_choice(user_data):
 
 
 def run():
-    tuple=start_atm()
-    # login(tuple[0],tuple[1])
-    user_id=tuple[0]
-    user_pwd=tuple[1]
-    login_type=tuple[2]
-
+    # tuple=start_atm()
+    # # login(tuple[0],tuple[1])
+    # user_id=tuple[0]
+    # user_pwd=tuple[1]
+    # login_type=tuple[2]
+    user_id,user_pwd,login_type=start_atm()
     if login_type == "用户":
         main_view(id=user_id,password=user_pwd)
     elif login_type =="管理员":

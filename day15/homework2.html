@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hide{
+            display:none;
+        }
+
+        .item .header{
+             height:35px;
+             background-color: #2459a2;
+             color: white;
+             line-height: 35px;
+        }
+        .pg-header{
+            background-color:#dddddd;
+            height:40px;
+            line-height:38px;
+        }
+        .table{
+            height: 400px;
+            width: 400px;
+            margin-left: 100px;
+        }
+
+        .c1{
+            position: fixed;
+            left:0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.6;
+            z-index: 9;
+        }
+
+        .c2{
+            width: 500px;
+            height: 400px;
+            background-color: white;
+            position: fixed;
+            left: 50%;
+            top:50%;
+            margin-left: -250px;
+            margin-top: -200px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+<div class="pg-header">
+        <div style="width:1350px;margin:0 auto;">
+            <div style="float:left;color:#696262">收藏本站</div>
+            <div style="float:right;color:#696262">
+                <a>登录</a>
+                <a>注册</a>
+                <a>我的订单</a>
+                <a>我的收藏</a>
+                <a>vip会员俱乐部</a>
+                <a>客户端服务</a>
+                <a>关注</a>
+                <a>手机版</a>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+
+<div style="width: 50px;margin-top:100px;">
+    <div class="item">
+               <div id="i1" class="header" onclick="ChangeMenu('i1');">菜单1</div>
+              <div class="content hide">
+                  <div>内容1</div>
+                  <div>内容1</div>
+                  <div>内容1</div>
+              </div>
+          </div>
+          <div class="item">
+               <div id="i2" class="header" onclick="ChangeMenu('i2');">菜单2</div>
+              <div class="content hide">
+                  <div>内容2</div>
+                  <div>内容2</div>
+                  <div>内容2</div>
+              </div>
+          </div>
+         <div class="item">
+               <div id="i3" class="header" onclick="ChangeMenu('i3')">菜单3</div>
+              <div class="content hide">
+                  <div>内容3</div>
+                  <div>内容3</div>
+                  <div>内容3</div>
+              </div>
+          </div>
+         <div class="item">
+               <div id="i4" class="header" onclick="ChangeMenu('i4')">菜单4</div>
+              <div class="content hide">
+                  <div>内容4</div>
+                  <div>内容4</div>
+                  <div>内容4</div>
+              </div>
+</div>
+   <div class="table">
+       <input type="button" value="添加" onclick="ShowModel();" />
+       <input type="button" value="全选" onclick="ChooseAll();" />
+       <input type="button" value="取消" onclick="CancleAll();" />
+       <input type="button" value="反选" onclick="ReverseAll();" />
+
+       <table>
+           <thead>
+               <tr>
+                   <th>选择</th>
+                   <th>主机名</th>
+                   <th>端口</th>
+               </tr>
+           </thead>
+           <tbody id="tb">
+               <tr>
+                   <td>
+                        <input type="checkbox">
+                    </td>
+                   <td>1.1.1.1</td>
+                   <td>190</td>
+               </tr>
+               <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                   <td>1.1.1.2</td>
+                   <td>192</td>
+               </tr>
+               <tr>
+                   <td>
+                        <input type="checkbox">
+                    </td>
+                   <td>1.1.1.3</td>
+                   <td>193</td>
+               </tr>
+
+           </tbody>
+       </table>
+   </div>
+
+    <!-- 遮罩层开始-->
+    <div id="j1" class="c1 hide"></div>
+    <!-- 遮罩层结束-->
+    <!-- 弹出框开始-->
+   <div id="j2" class="c2 hide">
+       <p><input type="text"></p>
+       <p><input type="text"></p>
+       <p>
+           <input type="button" value="取消" onclick="HideModel();" />
+           <input type="button" value="确定">
+       </p>
+   </div>
+    <!-- 弹出框结束-->
+</div>
+ <script>
+        function ChangeMenu(nid){
+            var current_header=document.getElementById(nid);
+            var item_list=current_header.parentElement.parentElement.children;
+            for(var i=0;i<item_list.length;i++){
+                var current_item=item_list[i];
+                current_item.children[1].classList.add('hide')
+            }
+            current_header.nextElementSibling.classList.remove('hide')
+        }
+
+
+         function ShowModel(){
+           document.getElementById('j1').classList.remove('hide');
+           document.getElementById('j2').classList.remove('hide');
+       }
+
+       function HideModel(){
+           document.getElementById('j1').classList.add('hide');
+           document.getElementById('j2').classList.add('hide');
+       }
+
+       function ChooseAll(){
+           var tbody=document.getElementById('tb');
+           // 获取所有tr
+           var trlist=tbody.children;
+           for(var i=0;i<trlist.length;i++){
+               //循环所有tr
+               var current_tr =trlist[i];
+               var checkbox=current_tr.children[0].children[0];
+               checkbox.checked=true;
+           }
+       }
+
+        function CancleAll(){
+           var tbody=document.getElementById('tb');
+           // 获取所有tr
+           var trlist=tbody.children;
+           for(var i=0;i<trlist.length;i++){
+               //循环所有tr
+               var current_tr =trlist[i];
+               var checkbox=current_tr.children[0].children[0];
+               checkbox.checked=false;
+           }
+       }
+
+        function ReverseAll(){
+           var tbody=document.getElementById('tb');
+           // 获取所有tr
+           var trlist=tbody.children;
+           for(var i=0;i<trlist.length;i++){
+               //循环所有tr
+               var current_tr =trlist[i];
+               var checkbox=current_tr.children[0].children[0];
+               if (checkbox.checked==true){
+                   checkbox.checked=false;
+               }
+               else{
+                   checkbox.checked=true;
+               }
+
+           }
+       }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+集中式认证 ldap ad 域（windows）
+
+堡垒机作用：权限可控，用户审计
+
+主流堡垒机：
+1.商业堡垒机：齐治 堡垒机 被360投资了
+2.开源堡垒机：一款好用的都没有 比如jumpserver
+alex写的 crazyeye
+
+今天成为了改过paramiko 源代码的人
+从github上下载paramiko源代码包找到demos文件夹
+由于现在paramiko 的demos不支持python3
+需要修改 demos/ineractive 87行：sys.stdout.write(data) 改为 sys.stdout.write(data.decode())
+启用终端 使用 python3 demo.py 输入用户名密码 可以直接实现ssh登录
+
+小点 traceback 把异常在哪行打印出来
+小点 getpass.getuser() 获取当前用户名
+小点 from .import .是指当前目录下
+小点 在vim 界面下看行数 :set nu   到某一行(比如51) :51
+
+在交互界面 /r 是回车
+
+
+堡垒机 表设计
+
+host
+  ip   hostname   port
+
+user_profile
+  username password
+
+remote_user
+  username password  auth_type
+  root     abc       ssh-password
+  root     123       ssh-key
+
+host_group
+ name
+
+auditlog
+ date 堡垒机用户 cmd ip  remote_user
